@@ -1,37 +1,71 @@
-const firstName = 'r0ulito';
-const lastName = 'formateur';
-
-function FirstName(props) {
-
-    /*
-    // Solution avec bonus
-    const formatFirstName = (firstName) => {
-        return firstName[0].toUpperCase() + firstName.substr(1);
+/* function Clock(props) {
+    return (
+        <div>
+        <h1>Bonjour, monde !</h1>
+        <h2>Il est {props.date.toLocaleTimeString()}.</h2>
+        </div>
+    );
     }
 
-    return <span>{formatFirstName(props.text)}</span>
-    */
+    function tick() {
+    ReactDOM.render(
+        <Clock date={new Date()} />,
+        document.getElementById('app')
+    );
+}
+setInterval(tick, 1000); */
 
-    // Solution sans bonus
-    return <span>{props.text[0].toUpperCase() + props.text.substr(1)}</span>
+/* class Clock extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {date : new Date()};
+    }
+    componentDidMount(){
+        this.timerId = setInterval(()=> this.tick(),1000);
+    }
+    componentWillUnmount(){
+        clearInterval(this.timerId)
+    }
+    tick(){
+        this.setState({date: new Date()})
+    }
+    
+    render(){
+        return(
+            <div>
+                <h1>Bonjour, monde !</h1>
+                <h2>Il est {this.state.date.toLocaleTimeString()}.</h2>  
+            </div>
+        ) 
+    }  
 }
 
-function LastName(props) {
+    ReactDOM.render(
+        <Clock />,
+        document.getElementById('app')
+    );
+ */
 
-    /*
-    // Solution avec bonus
-    const formatLastName = (lastName) => {
-        return lastName.toUpperCase();
+    const Clock2 = () => {
+        const [date, setDate] = React.useState(new Date());
+        React.useEffect(()=> {
+            tick();
+        },[date])
+
+        const tick = () =>{
+            setInterval(()=>  setDate(new Date(), 1000)
+           )
+        }
+
+        return(
+            <div>
+                <h1>Bonjour, monde !</h1>
+                <h2>Il est {date.toLocaleTimeString()}.</h2>  
+            </div>
+        )
     }
 
-    return <span>{formatLastName(props.text)}</span>
-    */
-
-    // Solution sans bonus
-    return <span className="red-text">{props.text.toUpperCase()}</span>
-
-}
-
-const helloWorld = <h1>Hello <FirstName text={firstName}/> <LastName text={lastName}/></h1>;
-
-ReactDOM.render(helloWorld, document.querySelector('#app'));
+    ReactDOM.render(
+        <Clock2 />,
+        document.getElementById('app')
+    );
