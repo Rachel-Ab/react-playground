@@ -1,10 +1,34 @@
-//const helloWorld = React.createElement('h1', {}, 'Hello world!');
+const FirstName = (props)=> {
+    return <span>{props.name[0].toUpperCase()+ props.name.slice(1)} </span>;
+}
+const LastName = (props)=> {
+    return <span className='red-text'>{props.name.toUpperCase()} </span>;
+}
 
-const firstName = 'r0ulito';
-const lastName = 'formateur';
+class FirstName2 extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return <span>{this.props.name[0].toUpperCase() + this.props.name.slice(1)} </span>;
+    }
+}
+class LastName2 extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return <span className='red-text'>{this.props.name.toUpperCase()} </span>;
+    }
+}
 
-
-// Solution sans bonus
-const helloWorld = <h1>Hello <span>{firstName[0].toUpperCase() + firstName.substr(1)}</span> <span className="red-text">{lastName.toUpperCase()}</span></h1>;
-
+const helloWorld = <div>
+    <p>Function</p>
+    <FirstName name='rachel'/>
+    <LastName name='abenzoar'/>
+    <br/>
+    <p>Class</p>
+    <FirstName2 name='rachel'/>
+    <LastName2 name='abenzoar'/>
+</div>
 ReactDOM.render(helloWorld, document.querySelector('#app'));
