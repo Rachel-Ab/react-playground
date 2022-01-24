@@ -78,22 +78,43 @@ ReactDOM.render(<Clock />, document.querySelector('#app'));  */
 
 function Clock(props) {
     React.useEffect(() => {
-        tick();        
+        tick();
     }, []);
     
     const [date, setDate] = React.useState(new Date());
+    const [couleur, setCouleur] = React.useState('black')
+    const currentValue = React.useRef()
 
     const tick = () => {
-        setInterval(() => {
+        currentValue.current = setInterval(() => {
             setDate(new Date())
         }, 1000)
     }
+    const colorBlack = () => {
+        setCouleur('black');
+    }
+    const randomColor = () => {
+        setCouleur('#'+Math.floor(Math.random()*16777215).toString(16))
+    }
     
-
+    const stopClock = (e) => {
+        console.log('stop');
+        e.preventDefault();
+        clearInterval(currentValue.current)
+    }
+    const resetClock = (e) => {
+        console.log('reset');
+        e.preventDefault();
+        tick();
+    }
     return (
         <div>
             <h1>Hello world</h1>
-            <h2>Il est {date.toLocaleTimeString()}.</h2>
+            <h2 style={{color: couleur}}>Il est {date.toLocaleTimeString()}.</h2>
+            <button onClick={randomColor}>Change color</button>
+            <button onClick={colorBlack}>Initial color</button>
+            <button onClick={stopClock}>Stop Clock </button>
+            <button onClick={resetClock}>Restart Clock </button>
         </div>
         );
 }
